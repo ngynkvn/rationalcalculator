@@ -1,3 +1,5 @@
+package symbols;
+
 public interface Number
 {
     Number plus(Number other);
