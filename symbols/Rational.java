@@ -1,6 +1,6 @@
 package symbols;
 
-public class Rational implements Number
+public class Rational implements Num
 {
     private int num;
     private int denom;
