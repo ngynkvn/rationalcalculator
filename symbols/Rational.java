@@ -2,13 +2,13 @@ package symbols;
 
 public class Rational implements Number
 {
-    private Number num;
-    private Number denom;
+    private int num;
+    private int denom;
     Rational(int num, int denom)
     {
         int gcd = gcd(num,denom);
-        this.num = new Integer(num/gcd);
-        this.denom = new Integer(denom/gcd);
+        this.num = num/gcd;
+        this.denom = denom/gcd;
     }
     public int getNumerator()
     {
@@ -25,5 +25,10 @@ public class Rational implements Number
         if(b == 0)
             return a;
         return gcd(b,a%b);
+    }
+
+    public String toString()
+    {
+        return num + "/" + denom;
     }
 }

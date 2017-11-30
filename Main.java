@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Main
 {
-    private static final Scanner in = new Scanner(System.in);
-    private static final Calculator calc = new Calculator();
+    private final Scanner in = new Scanner(System.in);
+    private final Calculator calc = new Calculator();
     public static void main(String [] args)
     {
         while(true)
