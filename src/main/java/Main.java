@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class Main
 {
-    private final Scanner in = new Scanner(System.in);
-    private final Calculator calc = new Calculator();
+    private static final Scanner in = new Scanner(System.in);
+    private static final Calculator calc = new Calculator();
     public static void main(String [] args)
     {
         while(true)
@@ -14,7 +14,6 @@ public class Main
             {
                 case 1:
                 calc.parseExpression(getExpression());
-                System.out.println(calc.result());
                 break;
                 case 2:
                 break;

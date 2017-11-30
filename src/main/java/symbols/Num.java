@@ -1,7 +1,6 @@
 package symbols;
 
-public interface Num
-{
+public interface Num {
     // Num plus(Num other);
     // Num minus(Num other);
     // Num multiply(Num other);
