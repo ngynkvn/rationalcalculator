@@ -15,7 +15,6 @@ public class CalculatorTest {
             fail("Uh oh, 1/0 was valid!");
         } catch (Exception e) {
             System.out.println("No divide by zeros here");
-            //TODO: handle exception
         }
     }
 }

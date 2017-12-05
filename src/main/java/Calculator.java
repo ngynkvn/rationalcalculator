@@ -3,14 +3,15 @@ import symbols.*;
 
 public class Calculator {
     private HashMap<String, Integer> precedence;
-
     Calculator() {
         precedence = new HashMap<>();
         precedence.put("+", 1);
         precedence.put("-", 1);
         precedence.put("*", 2);
+        precedence.put("x", 2);
         precedence.put("/", 2);
         precedence.put("^", 3);
+        precedence.put("rt",3);
         precedence.put("(", 0);
     }
 
@@ -31,7 +32,7 @@ public class Calculator {
                 stack.push(new Int(token));
             }
         }
-        System.out.println(stack.peek());
+        System.out.println(stack.size() == 1);
     }
 
     private Num doOperation(Num a, Num b, String op) {
@@ -72,6 +73,12 @@ public class Calculator {
     }
 
     private String[] tokenize(String s) {
-        return s.replace(" ", "").split("");
+        String [] ops = "+-*x^/()".split("");
+        s = s.replace(" ","");
+        for(int i = 0; i < ops.length; i++)
+        {
+            s = s.replace(ops[i], " "+ops[i]+" ");
+        }
+        return s.split(" ");
     }
 }
