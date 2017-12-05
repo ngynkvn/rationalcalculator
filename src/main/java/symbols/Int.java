@@ -1,6 +1,6 @@
 package symbols;
 
-public class Int implements Num {
+public class Int {
     private int n;
 
     public Int(String s) {
