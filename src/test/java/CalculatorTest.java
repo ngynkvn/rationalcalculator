@@ -17,4 +17,8 @@ public class CalculatorTest {
             System.out.println("No divide by zeros here");
         }
     }
+    @Test public void testExpressions(){
+        String exp = "2 + 3 * 4 - 5 ^ 2";
+        int result = -11;
+    }
 }
