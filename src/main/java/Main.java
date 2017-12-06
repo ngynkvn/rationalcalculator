@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import symbols.*;
 
 public class Main
 {
@@ -13,11 +14,14 @@ public class Main
             switch(option)
             {
                 case 1:
-                calc.parseExpression(getExpression());
+                Rational ans = calc.parseExpression(getExpression());
+                System.out.printf("Your answer is : %s\n",ans);
                 break;
                 case 2:
+                printHelp();
                 break;
                 case 3:
+                
                 break;
                 case 4:
                 in.close();
@@ -28,6 +32,10 @@ public class Main
     private static void printMenu()
     {
         System.out.println("1. Compute new expression\n2. Help\n3. Review previous expressions and answers\n4. Quit");
+    }
+    private static void printHelp()
+    {
+
     }
     private static String getExpression()
     {
