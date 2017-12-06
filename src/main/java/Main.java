@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main
 {
     private static final Scanner in = new Scanner(System.in);
-    private static final Calculator calc = new Calculator();
+    private static final Calculator calc = new Calculator(null);
     public static void main(String [] args)
     {
         while(true)

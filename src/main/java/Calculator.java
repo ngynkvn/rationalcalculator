@@ -21,9 +21,9 @@ public class Calculator {
 
     public void parseExpression(String str) {
         String[] tokens = tokenize(str);
-        // for(String x : tokens)
-        //     System.out.printf("[%s], ",x);
         ArrayList<String> rpnArrayList = RPN(tokens);
+        // for(String x : tokens)
+        //     System.out.printf("[%s]",x);
         evaluate(rpnArrayList);
     }
 
@@ -39,15 +39,14 @@ public class Calculator {
                     e.printStackTrace();
                 }
             } else {
-                stack.push(new Rational(Integer.parseInt((token)), 1));
+                stack.push(new Rational(Integer.parseInt((token))));
             }
         }
         System.out.println(stack.pop());
     }
 
     private Rational doOperation(Rational a, Rational b, String op) throws Exception {
-        // if(verbose)
-        //     System.out.println(a + " " + op + " " + b);
+        // System.out.printf("%s %s %s\n",a,op,b);
         switch (op) {
         case "+":
             return a.plus(b);
@@ -60,6 +59,8 @@ public class Calculator {
             return a.multiply(b);
         case "^":
             return a.exponent(b);
+        case "rt":
+            return b.exponent(a.getInverse());
         default:
             throw new Exception("Bad");
         }
@@ -70,8 +71,7 @@ public class Calculator {
         ArrayList<String> output = new ArrayList<>(tokens.length);
         Stack<String> opStack = new Stack<>();
         for (String token : tokens) {
-            // System.out.printf("[%s]\n",token);
-            if (token.matches("(-?\\d+)")) { //matches pos / neg num
+            if (token.matches("(-?\\d+)")) { //matches pos / neg number
                 output.add(token);
             } else if (isOperator(token)) {
                 while (opStack.size() != 0 && precedence.get(opStack.peek()) >= precedence.get(token)) {
@@ -92,20 +92,16 @@ public class Calculator {
         while (opStack.size() != 0) {
             output.add(opStack.pop());
         }
-        // if(verbose){
-        //     for(String x : output) System.out.print(x + " ");
-        //     System.out.println();
-        // }
         return output;
     }
 
     private boolean isOperator(String token) {
-        return "+-*x^/".contains(token);
+        return "+-*x^/rt".contains(token);
     }
 
     private String[] tokenize(String s) {
-        String ops = "[+*x^/()]";
-        s = s.replace(ops+"|(-)(?<!\\( ", " $& ");
+        s = s.replaceAll("[+*x^/()]|(-)(?<!)\\( |rt", " $0 "); //finds operators and adds spacing around them.
+        // System.out.println(s);
         return s.trim().split("(\\s+)");
     }
 
@@ -122,15 +118,22 @@ public class Calculator {
                          "2 ^ 3 + 4 * 5 - 2",
                          "( 2 + 3 ) * ( 4 - 5 ) ^ 2",
                          "1 / 3 + 1 / 4 + 1 / 12",
-                         "105 / 1344"};
+                         "105 / 1344",
+                         "2 + -1 + 2",
+                         "10 ^ 3",
+                         "8 ^ ( -4 / 3 ) * 4",
+                         "(6 / 2) rt (5 + 3)",
+                         "4 rt 16",
+                         "3 rt -8",
+                         "3 rt 2"};
         //exps not currently supported:
         /**
-        8 ^ ( -4 / 3 ) * 4 == 1 / 4
-        108 log 3 [log3 of 108] == 3 + 2 * 3 log 2
-        3 rt -8 == -2
-        ans / 2 [where ans is 3/10] == 3 / 20
-        ans ^ 2 [where ans is 3/10] == 9 / 100
-         */
+         * 
+      * 108 log 3 [log3 of 108] == 3 + 2 * 3 log 2
+      *  3 rt -8 == -2
+      *  ans / 2 [where ans is 3/10] == 3 / 20
+      *  ans ^ 2 [where ans is 3/10] == 9 / 100
+         **/
         for(String exp : exps)
         {
             System.out.printf("[%s] evaluates to ",exp);
