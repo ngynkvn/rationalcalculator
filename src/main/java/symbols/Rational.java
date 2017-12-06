@@ -75,7 +75,7 @@ public class Rational {
                 return new Rational(newDenom, newNum);
             else
                 return new Rational(newNum, newDenom);
-        } else { //TODO
+        } else { 
             if (inv)
                 return new Root(new Rational(newDenom,newNum), other.getDenominator());
             else

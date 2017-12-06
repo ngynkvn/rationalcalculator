@@ -125,7 +125,8 @@ public class Calculator {
                          "(6 / 2) rt (5 + 3)",
                          "4 rt 16",
                          "3 rt -8",
-                         "3 rt 2"};
+                         "3 rt 2",
+                         "3 rt 108 * 3 rt 16"};
         //exps not currently supported:
         /**
          * 
