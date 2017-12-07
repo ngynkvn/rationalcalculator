@@ -23,7 +23,10 @@ public class Main {
                     if(prev.size() > 10)
                         prev.remove(0);
                 } catch (Exception e) {
-                    System.out.println("Unexpected input. Please input a valid expression.");
+                    if(e.getMessage().equals(""))
+                        System.out.println("Unexpected input. Please input a valid expression.");
+                    else
+                        System.out.println(e.getMessage());
                 }
                 break;
             case 2:

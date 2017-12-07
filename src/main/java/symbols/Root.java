@@ -29,6 +29,12 @@ public class Root extends Rational {
             this.coefficient = 1;
         }
     }
+
+    public Rational multiply(Rational other)
+    {
+        return new Root(super.multiply(other), nth);
+    }
+
     private double nthAlgo(int n)
     {
         double x = 1;

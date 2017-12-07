@@ -66,13 +66,16 @@ public class Rational {
     public Rational exponent(Rational other) {
         if (other.getNumerator() == 0)
             return new Rational(1);
+        // else if(other.getNumerator() == 1)
+        //     return this.getInverse();
 
         boolean inv = other.getNumerator() < 0;
         int newNum = (int) Math.pow(num, Math.abs(other.getNumerator()));
-        int newDenom = (int) Math.pow(denom, other.getNumerator());
+        int newDenom = (int) Math.pow(denom, Math.abs(other.getNumerator()));
         if (other.isInteger()) {
-            if (inv)
+            if (inv){
                 return new Rational(newDenom, newNum);
+            }
             else
                 return new Rational(newNum, newDenom);
         } else { 
@@ -90,7 +93,10 @@ public class Rational {
     public boolean isInteger() {
         return denom == 1;
     }
-
+    public boolean isNegative()
+    {
+        return num < 0;
+    }
     public Rational getInverse() {
         return new Rational(denom, num);
     }

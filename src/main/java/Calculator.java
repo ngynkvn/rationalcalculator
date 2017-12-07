@@ -19,6 +19,9 @@ public class Calculator {
 
     public Rational parseExpression(String str) {
         String[] tokens = tokenize(str);
+        // for(String x : tokens){
+        //     System.out.printf("%s, ",x);
+        // }System.out.println();
         ArrayList<String> rpnArrayList = RPN(tokens);
         return evaluate(rpnArrayList);
     }
@@ -26,6 +29,7 @@ public class Calculator {
     private Rational evaluate(ArrayList<String> str) {
         Stack<Rational> stack = new Stack<>();
         for (String token : str) {
+            // System.out.printf("[%s], ",token);
             if (isOperator(token)) {
                 Rational a = stack.pop();
                 Rational b = stack.pop();
@@ -38,11 +42,12 @@ public class Calculator {
                 stack.push(new Rational(Integer.parseInt((token))));
             }
         }
-        
+        // System.out.println(stack.peek());
         return prev = stack.pop();
     }
 
     private Rational doOperation(Rational a, Rational b, String op) throws Exception {
+        System.out.printf("%s %s %s\n",a,op,b);
         switch (op) {
         case "+":
             return a.plus(b);
@@ -56,9 +61,12 @@ public class Calculator {
         case "^":
             return a.exponent(b);
         case "rt":
+            if(b.isNegative() && a.getNumerator() % 2 == 0){
+                throw new Exception("Can't take the square root of a negative number!");
+            }
             return b.exponent(a.getInverse());
         default:
-            throw new Exception("Bad");
+            throw new Exception("Bad this should never happen");
         }
     }
 
@@ -111,17 +119,22 @@ public class Calculator {
         Calculator c = new Calculator(flagVerbose);
         String[] exps = { "2 + 3 * 4 - 5 ^ 2", "2 ^ 3 + 4 * 5 - 2", "( 2 + 3 ) * ( 4 - 5 ) ^ 2",
                 "1 / 3 + 1 / 4 + 1 / 12", "105 / 1344", "2 + -1 + 2", "10 ^ 3", "8 ^ ( -4 / 3 ) * 4",
-                "(6 / 2) rt (5 + 3)", "4 rt 16", "3 rt -8", "3 rt 2", "3 rt 108 * 3 rt 16","3/10","ans/2" };
+                "(6 / 2) rt (5 + 3)", "4 rt 16", "3 rt -8", "3 rt 2", "3 rt 108 * 3 rt 16","3/10","ans/2", "2 rt 2 * 2 rt 2", "(-1 / 5) ^ -1","-4 ^ 3 - ans"};
+        String[] ans = {"-11","26","5","2/3","5/64","3","1000","1/4","2","2","-2","3 rt 2","12","3/10","3/20","2", "-5", "-59"};
         //exps not currently supported:
         /**
          * 
         * 108 log 3 [log3 of 108] == 3 + 2 * 3 log 2
         *  3 rt -8 == -2
-        *  ans / 2 [where ans is 3/10] == 3 / 20
         *  ans ^ 2 [where ans is 3/10] == 9 / 100
          **/
+        int cnt = 0;
         for (String exp : exps) {
-            System.out.printf("[%s] evaluates to %s\n", exp, c.parseExpression(exp));
+            Rational result = c.parseExpression(exp);
+            System.out.println("Evaluating: "+exp);
+            System.out.printf("[%s] evaluates to %s [%s]\n", exp, result, ans[cnt++].equals(result.toString()) ? "PASS" : "FAIL");
         }
+        // c.parseExpression("3/10");
+        // System.out.println(c.parseExpression("ans / 2"));
     }
 }
