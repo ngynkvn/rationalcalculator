@@ -18,15 +18,11 @@ public class Main {
                     String exp = getExpression();
                     System.out.println();
                     Rational ans = calc.parseExpression(exp);
-                    System.out.printf("Your answer is: %s\n\n",ans);
+                    System.out.printf("Your answer is: %s\n\n", ans);
                     prev.add(String.format("%s = %s", exp, ans));
-                    if(prev.size() > 10)
+                    if (prev.size() > 10)
                         prev.remove(0);
                 } catch (Exception e) {
-                    if(e.getMessage().equals(""))
-                        System.out.println("Unexpected input. Please input a valid expression.");
-                    else
-                        System.out.println(e.getMessage());
                 }
                 break;
             case 2:
@@ -53,8 +49,8 @@ public class Main {
 
     private static void printPrev() {
         int c = 1;
-        for(String x : prev)
-            System.out.printf("%d. %s\n",c,x);
+        for (String x : prev)
+            System.out.printf("%d. %s\n", c, x);
         System.out.println();
     }
 
@@ -75,6 +71,8 @@ public class Main {
                     throw new Exception();
             } catch (Exception e) {
                 System.out.println("Invalid option");
+                printMenu();
+                in.nextLine();
             }
         }
     }

@@ -47,7 +47,7 @@ public class Calculator {
     }
 
     private Rational doOperation(Rational a, Rational b, String op) throws Exception {
-        System.out.printf("%s %s %s\n",a,op,b);
+        // System.out.printf("%s %s %s\n",a,op,b);
         switch (op) {
         case "+":
             return a.plus(b);
@@ -62,7 +62,7 @@ public class Calculator {
             return a.exponent(b);
         case "rt":
             if(b.isNegative() && a.getNumerator() % 2 == 0){
-                throw new Exception("Can't take the square root of a negative number!");
+                throw new Exception("Can't take the square root of a negative number!\nSource: " + String.format("%s %s %s", a,op,b));
             }
             return b.exponent(a.getInverse());
         default:
