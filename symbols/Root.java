@@ -47,9 +47,6 @@ public class Root extends Rational {
         }
         
             return x;
-            // this.setNumerator((int)x);
-            // this.nth = 1;
-            // this.coefficient = 1;
     }
 
     public boolean isInteger()

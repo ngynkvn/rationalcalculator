@@ -86,10 +86,6 @@ public class Rational {
         }
     }
 
-    // public Root root(Rational other){
-    //     // return new Root(this,other);
-    // }
-
     public boolean isInteger() {
         return denom == 1;
     }

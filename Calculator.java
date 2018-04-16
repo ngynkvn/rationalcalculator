@@ -19,9 +19,6 @@ public class Calculator {
 
     public Rational parseExpression(String str) {
         String[] tokens = tokenize(str);
-        // for(String x : tokens){
-        //     System.out.printf("%s, ",x);
-        // }System.out.println();
         ArrayList<String> rpnArrayList = RPN(tokens);
         return evaluate(rpnArrayList);
     }
@@ -29,7 +26,6 @@ public class Calculator {
     private Rational evaluate(ArrayList<String> str) {
         Stack<Rational> stack = new Stack<>();
         for (String token : str) {
-            // System.out.printf("[%s], ",token);
             if (isOperator(token)) {
                 Rational a = stack.pop();
                 Rational b = stack.pop();
@@ -42,12 +38,10 @@ public class Calculator {
                 stack.push(new Rational(Integer.parseInt((token))));
             }
         }
-        // System.out.println(stack.peek());
         return prev = stack.pop();
     }
 
     private Rational doOperation(Rational a, Rational b, String op) throws Exception {
-        // System.out.printf("%s %s %s\n",a,op,b);
         switch (op) {
         case "+":
             return a.plus(b);
@@ -109,6 +103,8 @@ public class Calculator {
         return s.trim().split("(\\s+)");
     }
 
+
+    //Quick test case
     public static void main(String[] args) {
         String flagVerbose;
         try {
@@ -134,7 +130,5 @@ public class Calculator {
             System.out.println("Evaluating: "+exp);
             System.out.printf("[%s] evaluates to %s [%s]\n", exp, result, ans[cnt++].equals(result.toString()) ? "PASS" : "FAIL");
         }
-        // c.parseExpression("3/10");
-        // System.out.println(c.parseExpression("ans / 2"));
     }
 }
